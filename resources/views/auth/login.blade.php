@@ -223,6 +223,18 @@
                         <form method="POST" action="{{ route('login') }}" autocomplete="off" class="form-row mt-4">
                             @csrf 
                           <div class="form-group col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                                                      @if ($errors->any())
+        <div class="alert alert-danger">
+         
+            <ul>
+
+                @foreach ($errors->all() as $error)
+                {{ $error }}
+                @endforeach
+            </ul>
+          
+        </div><br />
+        @endif
                             <div class="d-flex align-items-center input-floating-label text-blue brc-blue-m2">
                                 
                                 <input type="email" class="form-control form-control-lg pr-4 shadow-none @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus />

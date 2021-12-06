@@ -162,6 +162,7 @@
 <b class="sub-arrow"></b>
 </li>
 @endcan
+@can('interior-list')
 <li class="nav-item {{isset($menu) ? ($menu=='system_setting' ? 'active open' : '') : ''}}">
     <a href="#" id="system_setting" class="nav-link dropdown-toggle {{isset($menu) ? ($menu=='system_setting' ? '' : 'collapsed') : 'collapsed'}}">
             <i class="nav-icon fa fa-cube"></i>
@@ -186,7 +187,7 @@
 </div>
 <b class="sub-arrow"></b>
 </li>
-
+@endcan
 </nav>
 
 							{{-- <li class="nav-item {{isset($sub_menu) ? ($sub_menu=='users' ? 'active' : '') : ''}}">
