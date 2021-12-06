@@ -21,14 +21,17 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/npm/basictable@1.0.9/basictable.min.css')}}">
 
         <!-- include vendor stylesheets used in "Form Basic Elements" page. see "application/views/default/pages/partials/form-basic/@vendor-stylesheets.hbs" -->
-    <link rel="stylesheet" type="text/css" href="{{asset('\npm\nouislider@14.6.1\distribute\nouislider.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('\npm\ion-rangeslider@2.3.1\css\ion.rangeSlider.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('\combine\npm\tiny-date-picker@3.2.8\tiny-date-picker.min.css,npm\tiny-date-picker@3.2.8\date-range-picker.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('\npm\eonasdan-bootstrap-datetimepicker@4.17.47\build\css\bootstrap-datetimepicker.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('\npm\bootstrap-colorpicker@3.2.0\dist\css\bootstrap-colorpicker.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/npm\nouislider@14.6.1\distribute\nouislider.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/npm\ion-rangeslider@2.3.1\css\ion.rangeSlider.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/combine\npm\tiny-date-picker@3.2.8\tiny-date-picker.min.css,npm\tiny-date-picker@3.2.8\date-range-picker.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/npm\eonasdan-bootstrap-datetimepicker@4.17.47\build\css\bootstrap-datetimepicker.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/npm\bootstrap-colorpicker@3.2.0\dist\css\bootstrap-colorpicker.min.css')}}">
 
-
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/npm\eonasdan-bootstrap-datetimepicker@4.17.47\build\css\bootstrap-datetimepicker.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/ace.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+      
+
   </head>
 
   <body>
@@ -249,7 +252,66 @@
     <script src="{{asset('assets\npm\es6-object-assign@1.1.0\dist\object-assign-auto.min.js')}}"></script>
     <script src="{{asset('assets\npm\@jaames\iro@5.2.0\dist\iro.min.js')}}"></script>
     <script src="{{asset('assets\npm\jquery-knob@1.2.11\dist\jquery.knob.min.js')}}"></script>
+    <script src="{{asset('assets\npm\tiny-date-picker@3.2.8\dist\date-range-picker.min.js')}}"></script>
+    <script>
+      jQuery(function($) {
+        var TinyDatePicker = DateRangePicker.TinyDatePicker;
+        TinyDatePicker('#id-date-1', {
+            mode: 'dp-below',
+          })
+          .on('statechange', function(ev) {
 
+          })
+
+        // modal one
+        TinyDatePicker('#id-date-2', {
+          mode: 'dp-modal',
+        }).on('statechange', function(ev) {
+          // console.log(ev);
+        })
+
+
+        // third one
+        // on mobile devices show native datepicker
+        if ('ontouchstart' in window && window.matchMedia('(max-width: 600px)')) {
+          document.querySelector('#id-date-3').setAttribute('type', 'date')
+        } else {
+          TinyDatePicker('#id-date-3', {
+            mode: 'dp-modal',
+          })
+        }
+
+        //////
+        // date range picker example
+        var daterange_container = document.querySelector('#id-daterange-container')
+        // Inject DateRangePicker into our container
+        DateRangePicker.DateRangePicker(daterange_container, {
+            mode: 'dp-modal'
+          })
+          .on('statechange', function(_, rp) {
+            // Update the inputs when the state changes
+            var range = rp.state
+            $('#id-daterange-from').val(range.start ? range.start.toDateString() : '')
+            $('#id-daterange-to').val(range.end ? range.end.toDateString() : '')
+          })
+
+        $('#id-daterange-from, #id-daterange-to').on('focus', function() {
+          daterange_container.classList.add('visible')
+        })
+
+        var daterange_wrapper = document.querySelector('#id-daterange-wrapper')
+        var previousTimeout = null;
+        $(daterange_wrapper).on('focusout', function() {
+          if (previousTimeout) clearTimeout(previousTimeout)
+          previousTimeout = setTimeout(function() {
+            if (!daterange_wrapper.contains(document.activeElement)) {
+              daterange_container.classList.remove('visible')
+            }
+          }, 10)
+        })
+
+    })
+    </script>
     @yield('scripts')
   </body>
 </html>
