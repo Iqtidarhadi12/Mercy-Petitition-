@@ -13,8 +13,12 @@ class CreateSectionsTable extends Migration
      */
     public function up()
     {
+
+      
+
         Schema::create('sections', function (Blueprint $table) {
             $table->Increments('id');
+
             $table->string('undersection');
             $table->timestamps();
         });

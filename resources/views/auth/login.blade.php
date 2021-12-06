@@ -219,16 +219,16 @@
                           Welcome back
                         </div>
                      
-  @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+
 
                         <form method="POST" action="{{ route('login') }}" autocomplete="off" class="form-row mt-4">
                             @csrf 
                           <div class="form-group col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+
+                                                   
+
                                                         @if ($errors->any())
+
         <div class="alert alert-danger">
          
             <ul>
