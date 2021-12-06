@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
-    protected $table='usections';
+    protected $table='sections';
     protected $fillable = [
         'undersection',
     ];
